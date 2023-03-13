@@ -2,9 +2,14 @@
 
 #move to data folder
 Set-Location C:/Users/sknie/OneDrive/PhD_Vault/Chapter2/Data/RespirometryAnalysisV1/RawData
+# real deal below
+# Set-Location C:/Users/sknie/OneDrive - The University of Queensland
 
 #set up variables
+# for test-runs
 $RootFolder = "C:/Users/sknie/OneDrive/PhD_Vault/Chapter2/Data/RespirometryAnalysisV1/RawData"
+# for the real deal 
+# $RootFolder = "C:/Users/sknie/OneDrive - The University of Queensland"
 $SubFolders = Get-ChildItem -Path $RootFolder -Directory
 
 #loop to clean up file names and remove the additional lines from the txt files
