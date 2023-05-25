@@ -1,15 +1,15 @@
 # Shell script to clean up data and prepare files for analysis
 
 #move to data folder
-Set-Location C:/Users/sknie/OneDrive/PhD_Vault/Chapter2/Data/RespirometryAnalysisV1/RawData
+#Set-Location C:/Users/sknie/OneDrive/PhD_Vault/Chapter2/Data/RespirometryAnalysisV1/RawData
 # real deal below
-# Set-Location C:/Users/sknie/OneDrive - The University of Queensland
+Set-Location "C:/Users/sknie/OneDrive - The University of Queensland/DATA"
 
 #set up variables
 # for test-runs
-$RootFolder = "C:/Users/sknie/OneDrive/PhD_Vault/Chapter2/Data/RespirometryAnalysisV1/RawData"
+#$RootFolder = "C:/Users/sknie/OneDrive/PhD_Vault/Chapter2/Data/RespirometryAnalysisV1/RawData"
 # for the real deal 
-# $RootFolder = "C:/Users/sknie/OneDrive - The University of Queensland"
+$RootFolder = "C:/Users/sknie/OneDrive - The University of Queensland/DATA"
 $SubFolders = Get-ChildItem -Path $RootFolder -Directory
 
 #loop to clean up file names and remove the additional lines from the txt files
