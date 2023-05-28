@@ -5,7 +5,8 @@ $rootFolderPath = "C:\Users\sknie\Desktop\pipetest"
 $txtFiles = Get-ChildItem -Path $rootFolderPath -Filter "*_cleaned_headed.txt" -Recurse
 
 # Specify the columns to delete (0-based index)
-$columnsToDelete = 4..17
+#$columnsToDelete = 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17
+#$columnsToDelete = 17, 16, 15, 14, 13, 12, 10, 9, 8, 7, 6, 5, 4, 2
 
 foreach ($txtFile in $txtFiles) {
     
@@ -18,7 +19,7 @@ $modifiedContent = $content | ForEach-Object {
     $columns = $_ -split "`t"
 
     # Select the first three columns
-    $selectedColumns = $columns[0..2]
+    $selectedColumns = $columns[0, 1, 3, 11 ]
 
     # Join the selected columns back together
     $selectedRow = $selectedColumns -join "`t"
