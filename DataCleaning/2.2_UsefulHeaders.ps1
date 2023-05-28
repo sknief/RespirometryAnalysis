@@ -7,6 +7,8 @@ foreach ($txtFile in $txtFiles) {
     # Read the content of the text file
     $content = Get-Content -Path $txtFile.FullName
 
+    
+
     # Identify the header row and split it into column headers
     $originalHeaders = $content[0] -split '\s+'
 
