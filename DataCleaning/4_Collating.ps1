@@ -12,7 +12,6 @@ foreach ($subfolder in $subfolders) {
 
     # Create a hashtable to store selected columns for each file in the subfolder
     $selectedColumns = @{}
-    #$modifiedHeaders = @{}
 
     # Process each text file in the subfolder
     foreach ($txtFile in $txtFiles) {
@@ -29,7 +28,6 @@ foreach ($subfolder in $subfolders) {
 
             # Output the selected column
             $selectedColumn
-
         }
 
         $originalHeaders = $column[0] -split '\s+'
@@ -37,24 +35,27 @@ foreach ($subfolder in $subfolders) {
         # Check if the source file name meets a certain condition
         if ($txtFile.FullName -like "*(B Ch1)*.txt") {
             # Rename the column
-            $modifiedHeaders = $originalHeaders  -replace 'Oxygen', 'Ch1' `
-                } 
+            $modifiedHeaders = $originalHeaders -replace 'Oxygen', 'Ch1'
+        }
         else {
-                    $modifiedHeaders = $originalHeaders  -replace 'Oxygen', 'NotCh1' `
-                }
-    
-      $column[0] = $modifiedHeaders -join "`t"
-    
+            $modifiedHeaders = $originalHeaders -replace 'Oxygen', 'NotCh1'
+        }
+
+        $column[0] = $modifiedHeaders -join "`t"
+
         # Add the selected column to the hashtable with the filename as the key
-        $selectedColumns = $column  # Replace "DesiredColumnHeader" with your desired column header
+        $selectedColumns[$txtFile.Name] = $column
     }
 
     # Write the collated data to the output file for the current subfolder
     $selectedColumns.GetEnumerator() | ForEach-Object {
+        # Create a string with the filename as the column header
+        $header = $_.Key
+
         # Create a string with the column data, joined by a tab delimiter
         $columnData = $_.Value -join "`t"
 
         # Output the column header followed by the column data
-        $columnData
+        $header, $columnData
     } | Out-File -FilePath $outputFilePath
 }

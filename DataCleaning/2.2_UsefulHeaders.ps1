@@ -11,22 +11,22 @@ foreach ($txtFile in $txtFiles) {
     $originalHeaders = $content[0] -split '\s+'
 
     # Step 2.2: Modify the column headers with desired names
-    $modifiedHeaders = $originalHeaders     -replace 'Variable18', 'Status_T' `
-                                            -replace 'Variable17', 'Status_P' `
-                                            -replace 'Variable16', 'Pressure' `
-                                            -replace 'Variable15', 'dt_P' `
-                                            -replace 'Variable14', 'Time_P' `
-                                            -replace 'Variable13', 'Date_P' `
-                                            -replace 'Variable12', 'Status_T' `
-                                            -replace 'Variable11', 'SampleTemp' `
-                                            -replace 'Variable10', 'dt_T' `
-                                            -replace 'Variable9', 'Time_T' `
-                                            -replace 'Variable8', 'Date_T' `
-                                            -replace 'Variable7', 'Status' `
-                                            -replace 'Variable6', 'AmbLight' `
-                                            -replace 'Variable5', 'SignalIntensity' `
-                                            -replace 'Variable4', 'dphi' `
-                                            -replace 'Variable3', 'Oxygen' `
+    $modifiedHeaders = $originalHeaders     -replace 'Variable18', 'Status_P' `
+                                            -replace 'Variable17', 'Pressure' `
+                                            -replace 'Variable16', 'dt_P' `
+                                            -replace 'Variable15', 'Time_P '`
+                                            -replace 'Variable14', 'Date_P' `
+                                            -replace 'Variable13', 'Status_T' `
+                                            -replace 'Variable12', 'Temp' `
+                                            -replace 'Variable11', 'dt_T' `
+                                            -replace 'Variable10', 'Time_T' `
+                                            -replace 'Variable9', 'Date_T' `
+                                            -replace 'Variable8', 'Status' `
+                                            -replace 'Variable7', 'AmbLi' `
+                                            -replace 'Variable6', 'SignalInt' `
+                                            -replace 'Variable5', 'dphi' `
+                                            -replace 'Variable4', 'Oxygen' `
+                                            -replace 'Variable3', 'dt' `
                                             -replace 'Variable2', 'Time' `
                                             -replace 'Variable1', 'Date'
 
