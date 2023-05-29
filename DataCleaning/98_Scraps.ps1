@@ -1,46 +1,35 @@
- # Process each text file in the subfolder
- foreach ($txtFile in $txtFiles) {
-    # Read the content of the current text file
-    $content = Get-Content -Path $txtFile.FullName
+$csvFiles = "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\Ch1_A_WorkingFile.csv", "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\Ch2_A_WorkingFile.csv", "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\Ch3_A_WorkingFile.csv"
+$outputFilePath = "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\AAAAAAAAAAA.csv"
 
-    # Select the desired column from each row
-    $column = $content | ForEach-Object {
-        # Split the row into columns using the delimiter (e.g., tab or comma)
-        $columns = $_ -split "`t"
+# Initialize an empty hashtable to store the combined data
+$combinedData = @{}
 
-        # Select the desired column index (0-based index)
-        $selectedColumn = $columns[2]  # Replace 0 with the desired column index
+# Iterate over each CSV file
+foreach ($csvFile in $csvFiles) {
+    # Get the file name without extension
+    $fileName = [System.IO.Path]::GetFileNameWithoutExtension($csvFile)
 
-        # Output the selected column
-        $selectedColumn
+    # Read the CSV file
+    $csvData = Import-Csv $csvFile
+
+    # Iterate over each column in the CSV data
+    foreach ($column in $csvData | Get-Member -MemberType NoteProperty | Select-Object -ExpandProperty Name) {
+        # Generate the column header using the file name
+        $header = "$fileName - $column"
+
+        # Check if the column already exists in the combined data
+        if ($combinedData.ContainsKey($header)) {
+            # If the column already exists, append the data from the current CSV file
+            $combinedData[$header] += $csvData.$column
+        } else {
+            # If the column doesn't exist, create a new entry in the combined data
+            $combinedData[$header] = $csvData.$column
+        }
     }
-
-    $originalHeaders = $column[0] -split '\s+'
-
-    # Check if the source file name meets a certain condition
-    if ($txtFile.FullName -like "*(B Ch1)*.txt") {
-        # Rename the column
-        $modifiedHeaders = $originalHeaders -replace 'Oxygen', 'Ch1'
-    }
-    else {
-        $modifiedHeaders = $originalHeaders -replace 'Oxygen', 'NotCh1'
-    }
-
-    $column[0] = $modifiedHeaders -join "`t"
-
-    # Add the selected column to the hashtable with the filename as the key
-    $selectedColumns[$txtFile.Name] = $column
 }
 
-# Write the collated data to the output file for the current subfolder
-$selectedColumns.GetEnumerator() | ForEach-Object {
-    # Create a string with the filename as the column header
-    $header = $_.Key
+# Convert the hashtable to a custom object to ensure consistent column order
+$combinedObject = [PSCustomObject]$combinedData
 
-    # Create a string with the column data, joined by a tab delimiter
-    $columnData = $_.Value -join "`t"
-
-    # Output the column header followed by the column data
-    $header, $columnData
-} | Out-File -FilePath $outputFilePath
-}
+# Export the combined data to a new CSV file
+$combinedObject | Export-Csv -Path $outputFilePath -NoTypeInformation
