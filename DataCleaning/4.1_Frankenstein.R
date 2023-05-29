@@ -1,11 +1,25 @@
+########################################################
+##                FIRESTING PIEPELINE                 ##
+##                   BY KNIEF.CODES                   ##
+##  ------------------------------------------------- ##
+##               AUTHOR: STELLA MS KNIEF              ##
+##      START DATE: 26/05/2023 PUBLISH: 29/05/23      ##
+##                    VERSION 1.0                     ##
+##       CITE WHAT YOU USE, KO-FI IF YOU'RE NICE      ##
+########################################################
 
-#optional install code
+#USER Input here!! #################################################
+WD <- "C:/Users/sknie/Desktop/pipetest/" #root folder, this needs to match previous files. 
+
+#optional install code, uncomment if needed
 #install.packages("qpcR")
 #install.packages("dplyr")
 #install.packages("ggplot2")
 #install.packages("foreach")
 #install.packages("readr")
 #install.packages("gridExtra")
+
+##################################################################
 
 #libraries
 library(qpcR)
@@ -15,7 +29,7 @@ library(foreach)
 library(readr)
 library(gridExtra)
 
-WD <- "C:/Users/sknie/Desktop/pipetest/" #root folder (variable?)
+
 setwd(WD)
 
 #WD

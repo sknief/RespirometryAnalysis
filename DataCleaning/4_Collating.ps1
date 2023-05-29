@@ -1,9 +1,23 @@
+########################################################
+##                FIRESTING PIEPELINE                 ##
+##                   BY KNIEF.CODES                   ##
+##  ------------------------------------------------- ##
+##               AUTHOR: STELLA MS KNIEF              ##
+##      START DATE: 26/05/2023 PUBLISH: 29/05/23      ##
+##                    VERSION 1.0                     ##
+##       CITE WHAT YOU USE, KO-FI IF YOU'RE NICE      ##
+########################################################
+
+## User input here!! ############################################
+# Specify the root folder containing the txt files and subfolders
 $rootFolderPath = "C:\Users\sknie\Desktop\pipetest"
+$outputFilePath = "C:\Users\sknie\Desktop\pipetest\subfolder_names.csv"
+$RScriptLocation = "C:\Users\sknie\Documents\GitHub\RespirometryAnalysis\DataCleaning\4.1_Frankenstein.R" 
+#################################################################
+
 
 # Get all subfolders in the root folder
 $subfolders = Get-ChildItem -Path $rootFolderPath -Directory
-
-$outputFilePath = "C:\Users\sknie\Desktop\pipetest\subfolder_names.csv"
 
 # Create an array to store subfolder names
 $subfolderNames = @()
@@ -15,10 +29,9 @@ foreach ($subfolder in $subfolders) {
 
 # Save the subfolder names as a text file
 $subfolderNames | Out-File -FilePath $outputFilePath -Encoding utf8
-#that works
+#that works - needed to automate RScript
 
-
-
+# Create Working Files
 foreach ($subfolder in $subfolders) {
     $outputFolderPath = Join-Path -Path $subfolder.FullName -ChildPath "Files"
     
@@ -47,7 +60,7 @@ foreach ($subfolder in $subfolders) {
             #$csvVersion | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
         if ($txtFile.Name -like "*`(A Ch.2`)*.txt") {
@@ -68,7 +81,7 @@ foreach ($subfolder in $subfolders) {
 
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
         if ($txtFile.Name -like "*`(A Ch.3`)*.txt") {
@@ -88,7 +101,7 @@ foreach ($subfolder in $subfolders) {
             $modifiedContent | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
         if ($txtFile.Name -like "*`(A Ch.4`)*.txt") {
@@ -108,7 +121,7 @@ foreach ($subfolder in $subfolders) {
             $modifiedContent | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
 ## all the B's
@@ -120,7 +133,7 @@ foreach ($subfolder in $subfolders) {
             $content | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
         if ($txtFile.Name -like "*`(B Ch.2`)*.txt") {
@@ -140,7 +153,7 @@ foreach ($subfolder in $subfolders) {
             $modifiedContent | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
         if ($txtFile.Name -like "*`(B Ch.3`)*.txt") {
@@ -160,7 +173,7 @@ foreach ($subfolder in $subfolders) {
             $modifiedContent | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
 
         if ($txtFile.Name -like "*`(B Ch.4`)*.txt") {
@@ -180,12 +193,11 @@ foreach ($subfolder in $subfolders) {
             $modifiedContent | Out-File -FilePath $outputFile -Encoding utf8
         }
         else {
-            Write-Host "Wrong File!"
+            Write-Host "."
         }
     }
 
     #Time to Frankenstein it in R cause Powershell is making me lose my will to live
-    $RScriptLocation = "C:\Users\sknie\Documents\GitHub\RespirometryAnalysis\DataCleaning\4.1_Frankenstein.R"
     Rscript.exe $RScriptLocation
 
 }

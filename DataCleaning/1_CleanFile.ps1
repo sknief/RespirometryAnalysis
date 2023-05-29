@@ -1,9 +1,18 @@
+########################################################
+##                FIRESTING PIEPELINE                 ##
+##                   BY KNIEF.CODES                   ##
+##  ------------------------------------------------- ##
+##               AUTHOR: STELLA MS KNIEF              ##
+##      START DATE: 26/05/2023 PUBLISH: 29/05/23      ##
+##                    VERSION 1.0                     ##
+##       CITE WHAT YOU USE, KO-FI IF YOU'RE NICE      ##
+########################################################
 
-
+## User input here!! ############################################
 # Specify the root folder containing the txt files and subfolders
 $rootFolderPath = "C:\Users\sknie\Desktop\pipetest"
+#################################################################
 
-## Step 1 goes here
 # Get the list of txt files in the root folder and subfolders
 $txtFiles = Get-ChildItem -Path $rootFolderPath -Filter "*.txt" -Recurse
 
