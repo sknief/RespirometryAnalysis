@@ -185,9 +185,8 @@ foreach ($subfolder in $subfolders) {
     }
 
     #Time to Frankenstein it in R cause Powershell is making me lose my will to live
-   # $RScriptLocation = "C:\Users\sknie\Documents\GitHub\RespirometryAnalysis\DataCleaning\4.1_Frankenstein.R"
-    #Rscript.exe $RScriptLocation
-
+    $RScriptLocation = "C:\Users\sknie\Documents\GitHub\RespirometryAnalysis\DataCleaning\4.1_Frankenstein.R"
+    Rscript.exe $RScriptLocation
 
 }
 

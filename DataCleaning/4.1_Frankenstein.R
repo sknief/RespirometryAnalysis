@@ -1,5 +1,11 @@
 
-#optional install code?
+#optional install code
+#install.packages("qpcR")
+#install.packages("dplyr")
+#install.packages("ggplot2")
+#install.packages("foreach")
+#install.packages("readr")
+#install.packages("gridExtra")
 
 #libraries
 library(qpcR)

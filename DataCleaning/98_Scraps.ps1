@@ -1,35 +1,33 @@
-$csvFiles = "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\Ch1_A_WorkingFile.csv", "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\Ch2_A_WorkingFile.csv", "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\Ch3_A_WorkingFile.csv"
-$outputFilePath = "C:\Users\sknie\Desktop\pipetest\2023-02-18_133424_COHORT A RESP DAY 5\Files\AAAAAAAAAAA.csv"
+$rootFolderPath = "C:\Users\sknie\Desktop\pipetest"
 
-# Initialize an empty hashtable to store the combined data
-$combinedData = @{}
+# Get all subfolders in the root folder
+$subfolders = Get-ChildItem -Path $rootFolderPath -Directory
 
-# Iterate over each CSV file
-foreach ($csvFile in $csvFiles) {
-    # Get the file name without extension
-    $fileName = [System.IO.Path]::GetFileNameWithoutExtension($csvFile)
+$outputFilePath = "C:\Users\sknie\Desktop\pipetest\subfolder_names.csv"
 
-    # Read the CSV file
-    $csvData = Import-Csv $csvFile
+# Create an array to store subfolder names
+$subfolderNames = @()
 
-    # Iterate over each column in the CSV data
-    foreach ($column in $csvData | Get-Member -MemberType NoteProperty | Select-Object -ExpandProperty Name) {
-        # Generate the column header using the file name
-        $header = "$fileName - $column"
-
-        # Check if the column already exists in the combined data
-        if ($combinedData.ContainsKey($header)) {
-            # If the column already exists, append the data from the current CSV file
-            $combinedData[$header] += $csvData.$column
-        } else {
-            # If the column doesn't exist, create a new entry in the combined data
-            $combinedData[$header] = $csvData.$column
-        }
-    }
+foreach ($subfolder in $subfolders) {
+    # Add the subfolder name to the array
+    $subfolderNames += $subfolder.Name
 }
 
-# Convert the hashtable to a custom object to ensure consistent column order
-$combinedObject = [PSCustomObject]$combinedData
+# Save the subfolder names as a text file
+$subfolderNames | Out-File -FilePath $outputFilePath -Encoding utf8
+#that works
 
-# Export the combined data to a new CSV file
-$combinedObject | Export-Csv -Path $outputFilePath -NoTypeInformation
+
+foreach ($subfolder in $subfolders) {
+    $outputFolderPath = Join-Path -Path $subfolder.FullName -ChildPath "Files"
+    
+
+    New-Item -ItemType Directory -Path $outputFolderPath -Force
+
+    
+    #Time to Frankenstein it in R cause Powershell is making me lose my will to live
+    $RScriptLocation = "C:\Users\sknie\Documents\GitHub\RespirometryAnalysis\DataCleaning\4.1_Frankenstein.R"
+    Rscript.exe $RScriptLocation
+
+
+}
