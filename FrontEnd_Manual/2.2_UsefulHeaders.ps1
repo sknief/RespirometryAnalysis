@@ -10,7 +10,7 @@
 
 ## User input here!! ############################################
 # Specify the root folder containing the txt files and subfolders
-$rootFolderPath = "C:\Users\sknie\Desktop\pipetest"
+$rootFolderPath = "C:\Users\sknie\OneDrive - The University of Queensland\RESP_DATA"
 #################################################################
 
 

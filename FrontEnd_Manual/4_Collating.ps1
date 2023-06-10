@@ -10,8 +10,8 @@
 
 ## User input here!! ############################################
 # Specify the root folder containing the txt files and subfolders
-$rootFolderPath = "C:\Users\sknie\Desktop\pipetest"
-$outputFilePath = "C:\Users\sknie\Desktop\pipetest\subfolder_names.csv"
+$rootFolderPath = "C:\Users\sknie\OneDrive - The University of Queensland\RESP_DATA"
+$outputFilePath = "C:\Users\sknie\OneDrive - The University of Queensland\RESP_DATA\subfolder_names.csv"
 $RScriptLocation = "C:\Users\sknie\Documents\GitHub\RespirometryAnalysis\DataCleaning\4.1_Frankenstein.R" 
 #################################################################
 
@@ -198,7 +198,7 @@ foreach ($subfolder in $subfolders) {
     }
 
     #Time to Frankenstein it in R cause Powershell is making me lose my will to live
-    Rscript.exe $RScriptLocation
+   # Rscript.exe $RScriptLocation # dont run it in a loop actuaLLy, run in isolation
 
 }
 

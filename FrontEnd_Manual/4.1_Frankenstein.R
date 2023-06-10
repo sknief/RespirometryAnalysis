@@ -9,7 +9,7 @@
 ########################################################
 
 #USER Input here!! #################################################
-WD <- "C:/Users/sknie/Desktop/pipetest/" #root folder, this needs to match previous files. 
+WD <- "C:/Users/sknie/OneDrive - The University of Queensland/RESP_DATA/" #root folder, this needs to match previous files. 
 
 #optional install code, uncomment if needed
 #install.packages("qpcR")
