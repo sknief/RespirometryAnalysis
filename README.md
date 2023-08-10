@@ -1,4 +1,5 @@
- [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com) 
+ [![forthebadge](https://img.shields.io/badge/Made_with-Love-orange?style=for-the-badge&labelColor=red)](https://forthebadge.com) [![forthebadge](https://img.shields.io/badge/Open_Source-orange?style=for-the-badge&labelColor=red
+)](https://forthebadge.com) 
  
 # Respirometry Analysis : Quick and Easy
 Because surely we can all save some time when doing respirometry analysis! 
