@@ -80,9 +80,9 @@ foreach(i=1: (nrow(folders))) %do% {
   FrankieStein_B <- qpcR:::cbind.na(Ch1_B_Raw, Ch2_B_Raw, Ch3_B_Raw, Ch4_B_Raw) 
   
   #reorder one last time
-  FrankenStein <-FrankenStein[, c(1, 7, 8, 9, 10, 17, 18, 19, 20, 2, 3, 4, 14, 5, 15, 6, 16)]
-  FrankieStein_A <- FrankieStein_A[, c(1, 7, 8, 9, 10, 2, 3, 4, 5, 6)]
-  FrankieStein_B <- FrankieStein_B[, c(1, 7, 8, 9, 10, 2, 3, 4, 5, 6)]
+  FrankenStein <-FrankenStein[, c(1, 7, 8, 9, 10, 17, 18, 19, 20, 4, 14, 5, 15, 6, 16, 2, 3)]
+  FrankieStein_A <- FrankieStein_A[, c(1, 7, 8, 9, 10, 4, 5, 6, 2, 3)]
+  FrankieStein_B <- FrankieStein_B[, c(1, 7, 8, 9, 10, 4, 5, 6, 2, 3)]
   
   
   #titles
@@ -92,16 +92,19 @@ foreach(i=1: (nrow(folders))) %do% {
   
   #export files
   write.table(FrankenStein, FrnkStn,
+              sep = "," ,
               append = FALSE,
               row.names = FALSE,
               col.names = TRUE)
   
   write.table(FrankieStein_A, FrnkStn_A,
+              sep = "," ,
               append = FALSE,
               row.names = FALSE,
               col.names = TRUE)
   
   write.table(FrankieStein_B, FrnkStn_B,
+              sep = "," ,
               append = FALSE,
               row.names = FALSE,
               col.names = TRUE)
