@@ -70,8 +70,8 @@ foreach(i=1: (nrow(folders))) %do% {
   
   
   #move columns around
-  Ch1_A_Raw <- Ch1_A_Raw[, c(5,1,2,4,3)]
-  Ch1_B_Raw <- Ch1_B_Raw[, c(5,1,2,4,3)]
+  Ch1_A_Raw <- Ch1_A_Raw[, c(7,1,2,5,6,4,3)]
+  Ch1_B_Raw <- Ch1_B_Raw[, c(7,1,2,5,6,4,3)]
   
   
   #append
@@ -80,15 +80,15 @@ foreach(i=1: (nrow(folders))) %do% {
   FrankieStein_B <- qpcR:::cbind.na(Ch1_B_Raw, Ch2_B_Raw, Ch3_B_Raw, Ch4_B_Raw) 
   
   #reorder one last time
-  FrankenStein <-FrankenStein[, c(1, 5, 6, 7, 8, 13, 14, 15, 16, 4, 12, 3, 2)]
-  FrankieStein_A <- FrankieStein_A[, c(1, 5, 6, 7, 8, 4, 3, 2)]
-  FrankieStein_B <- FrankieStein_B[, c(1, 5, 6, 7, 8, 4, 3, 2)]
+  FrankenStein <-FrankenStein[, c(1, 7, 8, 9, 10, 17, 18, 19, 20, 2, 3, 4, 14, 5, 15, 6, 16)]
+  FrankieStein_A <- FrankieStein_A[, c(1, 7, 8, 9, 10, 2, 3, 4, 5, 6)]
+  FrankieStein_B <- FrankieStein_B[, c(1, 7, 8, 9, 10, 2, 3, 4, 5, 6)]
   
   
   #titles
-  FrnkStn <- as.character(paste0(WD, ExpID, "_Frankenstein.txt"))
-  FrnkStn_A <- as.character(paste0(WD, ExpID, "_Frankiestein_A.txt"))
-  FrnkStn_B <- as.character(paste0(WD, ExpID, "_Frankiestein_B.txt"))
+  FrnkStn <- as.character(paste0(WD, ExpID, "/_Frankenstein.txt"))
+  FrnkStn_A <- as.character(paste0(WD, ExpID, "/_Frankiestein_A.txt"))
+  FrnkStn_B <- as.character(paste0(WD, ExpID, "/_Frankiestein_B.txt"))
   
   #export files
   write.table(FrankenStein, FrnkStn,

@@ -4,6 +4,11 @@
 #Packages
 library(dplyr)
 library(ggplot2)
+library(lme4)
+library(nlme)
+library(lmerTest)
+library(dplyr)
+library(purrr)
 
 ######## Step 1: Clean up CSV file ##########
 #remove unnessecary artifacts
@@ -37,8 +42,48 @@ FishMerge_SMR$SMR2 <- ((-1*((FishMerge_SMR$Slope_hour)/100)*((RespVol-FishMerge_
 #exclude the boost ones for now cause of sequence error
 FishMerge_SMR_NoBoost <- FishMerge_SMR[!(FishMerge_SMR$Cohort == "AB"),]
 
+###### everything above can be speedrun code-execution wise #######
+
+### A: Outlier Removals (based on notes) ####
+
+##need to go thru notes and excel
+
+### B: Complex mixed effects linear model? ####
+FishMerge_SMR_NoBoost$Fish <- as.character(FishMerge_SMR_NoBoost$Fish)
+FishMerge_SMR_NoBoost$Treatment <- as.factor(FishMerge_SMR_NoBoost$Treatment)
+complex <- lmer(FishMerge_SMR_NoBoost$SMR2 ~ FishMerge_SMR_NoBoost$Treatment + (1| FishMerge_SMR_NoBoost$Fish) + (1 | FishMerge_SMR_NoBoost$Respirometer) + FishMerge_SMR_NoBoost$Day + (1 | FishMerge_SMR_NoBoost$Cohort))
+#diagnostic plot
+plot(complex)
+summary(complex)
+anova(complex)
+
+### C: T-tests in total and per day ####
+#need to make a dataset of all the means per day and per treatment (totaL)
+MeanSMRs <- aggregate(FishMerge_SMR_NoBoost$SMR2 ~ FishMerge_SMR_NoBoost$Day + FishMerge_SMR_NoBoost$Treatment, data = FishMerge_SMR_NoBoost, FUN = "mean")
+t.test(FishMerge_SMR_NoBoost$SMR2 ~ FishMerge_SMR_NoBoost$Treatment, MeanSMRs)
+
+#time for day-based t-tests
+grouped_data <- FishMerge_SMR_NoBoost %>% group_by(Day)
+# Define a function that performs the t-test on a subset of the data
+perform_t_test <- function(subset) {
+  t.test(SMR2 ~ Treatment, data = subset)$p.value 
+}
+# Apply the t-test function to each group
+p_values <- grouped_data %>% summarize(p_value = perform_t_test(cur_data()))
+print(p_values) #none significant woooohoOOOOOOO
+
+#need to verify if that actually did what I wanted it to do - test with day 1
+Day1subset <- FishMerge_SMR_NoBoost[(FishMerge_SMR_NoBoost$Day == 1),]
+t.test(Day1subset$SMR2 ~ Day1subset$Treatment) # values agree, so that means it worked
 
 
+
+### D: Cohort separation ####
+
+
+
+### E: Individual tracks ? ####
+  
 
 
 

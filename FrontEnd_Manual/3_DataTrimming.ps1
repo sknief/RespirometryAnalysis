@@ -32,7 +32,7 @@ $modifiedContent = $content | ForEach-Object {
     $columns = $_ -split "`t"
 
     # Select the first three columns
-    $selectedColumns = $columns[0, 1, 3, 11 ]
+    $selectedColumns = $columns[0, 1, 3, 4, 11, 16]
 
     # Join the selected columns back together
     $selectedRow = $selectedColumns -join "`t"
